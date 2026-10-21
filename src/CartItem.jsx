@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeItem, updateQuantity } from './CartSlice';
+import { addItem, removeItem, updateQuantity } from './CartSlice';
 import './CartItem.css';
 
 function CartItem({ onContinueShopping }) {
@@ -11,16 +11,16 @@ function CartItem({ onContinueShopping }) {
     let total = 0;
 
     cart.forEach((item) => {
-      total += parseFloat(String(item.cost).replace('$', '')) * item.quantity;
+      const cost = parseFloat(String(item.cost).replace('$', ''));
+      total += cost * item.quantity;
     });
 
     return total.toFixed(2);
   };
 
   const calculateTotalCost = (item) => {
-    return (
-      parseFloat(String(item.cost).replace('$', '')) * item.quantity
-    ).toFixed(2);
+    const cost = parseFloat(String(item.cost).replace('$', ''));
+    return (cost * item.quantity).toFixed(2);
   };
 
   const handleContinueShopping = () => {
@@ -37,7 +37,7 @@ function CartItem({ onContinueShopping }) {
     dispatch(
       updateQuantity({
         name: item.name,
-        quantity: item.quantity + 1,
+        quantity: item.quantity + 1
       })
     );
   };
@@ -47,7 +47,7 @@ function CartItem({ onContinueShopping }) {
       dispatch(
         updateQuantity({
           name: item.name,
-          quantity: item.quantity - 1,
+          quantity: item.quantity - 1
         })
       );
     } else {
@@ -75,6 +75,7 @@ function CartItem({ onContinueShopping }) {
         <div className="empty-cart">
           <h2>Your cart is empty 🌱</h2>
           <p>Discover beautiful plants for your home.</p>
+
           <button
             className="continue-shopping"
             onClick={handleContinueShopping}

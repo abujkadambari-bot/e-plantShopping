@@ -9,7 +9,7 @@ const plantsArray = [
     category: 'Air Purifying Plants',
     plants: [
       { name: 'Snake Plant', image: 'https://images.unsplash.com/photo-1593691509543-c55fb32e5cee?w=400', description: 'Purifies indoor air and is easy to maintain.', cost: 15 },
-      { name: 'Peace Lily', image: 'https://images.unsplash.com/photo-1593691509543-c55fb32e5cee?w=400', description: 'A beautiful plant that helps improve air quality.', cost: 20 },
+      { name: 'Peace Lily', image: 'https://images.unsplash.com/photo-1497250681960-ef046c08a56e?w=400', description: 'A beautiful plant that helps improve air quality.', cost: 20 },
       { name: 'Spider Plant', image: 'https://images.unsplash.com/photo-1572688484438-313a6e50c333?w=400', description: 'A resilient plant perfect for indoor spaces.', cost: 12 },
       { name: 'Areca Palm', image: 'https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=400', description: 'Adds a tropical touch to your home.', cost: 25 },
       { name: 'Rubber Plant', image: 'https://images.unsplash.com/photo-1509423350716-97f9360b4e09?w=400', description: 'A leafy plant that brightens any room.', cost: 22 },
@@ -64,7 +64,7 @@ const plantsArray = [
 
 function ProductList({ onHomeClick }) {
   const dispatch = useDispatch();
-  const cartItems = useSelector((state) => state.cart.items);
+  const CartItems = useSelector((state) => state.cart.items);
 
   const [addedToCart, setAddedToCart] = useState({});
   const [showCart, setShowCart] = useState(false);
@@ -78,9 +78,10 @@ function ProductList({ onHomeClick }) {
     }));
   };
 
-  const getCartQuantity = (productName) => {
-    const item = cartItems.find((item) => item.name === productName);
-    return item ? item.quantity : 0;
+  const calculateTotalQuantity = () => {
+    return CartItems
+      ? CartItems.reduce((total, item) => total + item.quantity, 0)
+      : 0;
   };
 
   const handleContinueShopping = () => {
@@ -102,9 +103,7 @@ function ProductList({ onHomeClick }) {
           </button>
 
           <button onClick={() => setShowCart(true)}>
-            🛒 Cart (
-            {cartItems.reduce((total, item) => total + item.quantity, 0)}
-            )
+            🛒 Cart ({calculateTotalQuantity()})
           </button>
         </div>
       </nav>
