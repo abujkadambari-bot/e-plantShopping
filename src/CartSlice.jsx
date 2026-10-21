@@ -9,7 +9,7 @@ reducers: {
 addItem: (state, action) => {
 const { name, image, cost, description } = action.payload;
 
-```
+
   const existingItem = state.items.find(
     (item) => item.name === name
   );
@@ -55,7 +55,7 @@ updateQuantity: (state, action) => {
     }
   }
 },
-```
+
 
 },
 });
