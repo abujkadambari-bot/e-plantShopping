@@ -65,6 +65,7 @@ const plantsArray = [
 function ProductList({ onHomeClick }) {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
+
   const [addedToCart, setAddedToCart] = useState({});
   const [showCart, setShowCart] = useState(false);
 
@@ -82,6 +83,10 @@ function ProductList({ onHomeClick }) {
     return item ? item.quantity : 0;
   };
 
+  const handleContinueShopping = () => {
+    setShowCart(false);
+  };
+
   return (
     <div className="product-page">
       <nav className="navbar">
@@ -91,40 +96,47 @@ function ProductList({ onHomeClick }) {
 
         <div className="navbar-links">
           <button onClick={onHomeClick}>Home</button>
-          <button onClick={() => setShowCart(false)}>Plants</button>
+
+          <button onClick={() => setShowCart(false)}>
+            Plants
+          </button>
+
           <button onClick={() => setShowCart(true)}>
-            🛒 Cart ({cartItems.reduce((total, item) => total + item.quantity, 0)})
+            🛒 Cart (
+            {cartItems.reduce((total, item) => total + item.quantity, 0)}
+            )
           </button>
         </div>
       </nav>
 
       {showCart ? (
-        <CartItem />
+        <CartItem onContinueShopping={handleContinueShopping} />
       ) : (
         <div className="product-grid">
-          {plantsArray.map((category, index) => (
+          {plantsArray.map((category) => (
             <div className="plant-category" key={category.category}>
               <h1>{category.category}</h1>
 
               <div className="product-list">
-                {category.plants.map((plant, plantIndex) => (
-                  <div
-                    className="product-card"
-                    key={`${plant.name}-${plantIndex}`}
-                  >
+                {category.plants.map((plant) => (
+                  <div className="product-card" key={plant.name}>
                     <img
                       className="product-image"
                       src={plant.image}
                       alt={plant.name}
                     />
 
-                    <div className="product-title">{plant.name}</div>
+                    <div className="product-title">
+                      {plant.name}
+                    </div>
 
                     <div className="product-description">
                       {plant.description}
                     </div>
 
-                    <div className="product-cost">${plant.cost}</div>
+                    <div className="product-cost">
+                      ${plant.cost}
+                    </div>
 
                     <button
                       className="product-button"
@@ -132,7 +144,7 @@ function ProductList({ onHomeClick }) {
                       disabled={Boolean(addedToCart[plant.name])}
                     >
                       {addedToCart[plant.name]
-                        ? `Added (${getCartQuantity(plant.name)})`
+                        ? 'Added to Cart'
                         : 'Add to Cart'}
                     </button>
                   </div>
