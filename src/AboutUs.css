@@ -1,33 +1,81 @@
-.about-us-container {
-    width: 1000px;
-    /* margin: 0 auto; */
-    /* padding: 20px; */
-    /* background-color: red; */
-    text-align: justify;
-  }
-  
-  .about-us-heading {
-    font-size: 32px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  .about-us-description {
-    font-size: 18px;
-    color: #666;
-    margin-bottom: 30px;
-    text-align: center;
-  }
-  
-  .about-us-content {
-    font-size: 18px;
-    margin-bottom: 20px;
-  }
-  .plant_logo_right{
-    text-align: right;
+
+.about-us {
+  width: 100%;
+  padding: 60px 8%;
+  background: #edf5e9;
+  box-sizing: border-box;
+}
+
+.about-us-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.about-us-label {
+  color: #4c8252;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.about-us-content h2 {
+  margin: 15px 0;
+  color: #245c35;
+  font-size: 34px;
+}
+
+.about-us-content > p {
+  max-width: 800px;
+  margin: 15px auto;
+  color: #58685b;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.about-us-features {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 25px;
+  margin-top: 40px;
+}
+
+.about-us-feature {
+  padding: 25px 18px;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 4px 12px rgba(36, 92, 53, 0.08);
+}
+
+.about-us-feature span {
+  font-size: 35px;
+}
+
+.about-us-feature h3 {
+  margin: 12px 0 8px;
+  color: #245c35;
+  font-size: 19px;
+}
+
+.about-us-feature p {
+  margin: 0;
+  color: #667568;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+@media (max-width: 700px) {
+  .about-us {
+    padding: 40px 5%;
   }
 
-  .plant_logo_left{
-    text-align: left;
+  .about-us-content h2 {
+    font-size: 27px;
   }
+
+  .about-us-features {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+}
+
